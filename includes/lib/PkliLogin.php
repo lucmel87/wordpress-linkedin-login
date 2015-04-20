@@ -267,8 +267,9 @@ Class PkliLogin {
     }
     
     // Used by shortcode in order to get the login link
+    
     public function get_login_link($attributes = false){
-        
+       if(!is_user_logged_in()){ // to prevent show the button link after user login
 	    // extract data from array
 	    extract( shortcode_atts( array('text' => 'Login With LinkedIn', 'img' => PKLI_URL.'includes/assets/img/linkedin-button.png', 'redirect' => '' , 'class' => ''), $attributes ) );
 
@@ -286,7 +287,9 @@ Class PkliLogin {
 	    
 	    // Default fields
 	    return "<a href='".$auth_url."' class='$class'><img src='".$img."' /></a>";
-	    
+    	}else{
+		return '';
+	}
 	        
     }
     
